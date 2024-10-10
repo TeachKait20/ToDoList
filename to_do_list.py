@@ -6,6 +6,20 @@ def add_task(task):
         file.write(f"- [ ] {task}\n")
     print(f"Задача '{task}' добавлена в README.md")
 
+def show_task():
+    try:
+        with open(file_path, "r") as file:
+            content = file.readlines()
+            if not content:
+                print("Список задач пуст.")
+            else:
+                print("Список задач:")
+                for line in content:
+                    print(line.strup())
+    except FileExistsError:
+        print("Файл README.md не найден.")
+
+
 def main():
     while True:
         command = input("Введите команду (add/show/complete/delete/exit): ")
