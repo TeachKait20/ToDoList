@@ -15,7 +15,7 @@ def show_task():
             else:
                 print("Список задач:")
                 for line in content:
-                    print(line.strup())
+                    print(line.strip())
     except FileExistsError:
         print("Файл README.md не найден.")
 
@@ -28,7 +28,7 @@ def main():
             task = input("Введите задачу: ")
             add_task(task)
         elif command == 'show':
-            pass  # Вывод всех заметок
+            show_task()
         elif command == 'complete':
             pass  # Попросить ввести номер задачи для отметки выполнения. Проверить есть ли такая задача.
         elif command == 'delete':
