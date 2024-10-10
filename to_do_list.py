@@ -6,6 +6,7 @@ def add_task(task):
         file.write(f"- [ ] {task}\n")
     print(f"Задача '{task}' добавлена в README.md")
 
+
 def show_task():
     try:
         with open(file_path, "r") as file:
@@ -16,7 +17,23 @@ def show_task():
                 print("Список задач:")
                 for line in content:
                     print(line.strip())
-    except FileExistsError:
+    except FileNotFoundError:
+        print("Файл README.md не найден.")
+
+
+def complete_task(task_number):
+    try:
+        with open(file_path, "r") as file:
+            content = file.readlines()
+        if 0 < task_number <= len(content):
+            content[task_number - 1] = content[task_number - 1].replace("[ ]", "[x]")
+
+            with open(file_path, "w") as file:
+                content = file.writelines()
+            print(f"Задача {task_number} отмечена как выполненная.")
+        else:
+            print("Задача с таким номером не найдена.")
+    except FileNotFoundError:
         print("Файл README.md не найден.")
 
 
@@ -30,7 +47,7 @@ def main():
         elif command == 'show':
             show_task()
         elif command == 'complete':
-            pass  # Попросить ввести номер задачи для отметки выполнения. Проверить есть ли такая задача.
+            complete_task()
         elif command == 'delete':
             pass  # Удалить задачу
         elif command == 'exit':
