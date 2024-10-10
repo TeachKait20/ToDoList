@@ -21,7 +21,7 @@ def show_task():
         print("Файл README.md не найден.")
 
 
-def complete_task(task_number):
+def complete_task(task_number):  # fail
     try:
         with open(file_path, "r") as file:
             content = file.readlines()
@@ -47,7 +47,8 @@ def main():
         elif command == 'show':
             show_task()
         elif command == 'complete':
-            complete_task()
+            task_number = int(input("Введите номер задачи: "))
+            complete_task(task_number)
         elif command == 'delete':
             pass  # Удалить задачу
         elif command == 'exit':
