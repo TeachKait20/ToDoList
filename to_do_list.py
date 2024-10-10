@@ -25,11 +25,12 @@ def complete_task(task_number):  # fail
     try:
         with open(file_path, "r") as file:
             content = file.readlines()
+
         if 0 < task_number <= len(content):
             content[task_number - 1] = content[task_number - 1].replace("[ ]", "[x]")
 
             with open(file_path, "w") as file:
-                content = file.writelines()
+                content = file.writelines(content)
             print(f"Задача {task_number} отмечена как выполненная.")
         else:
             print("Задача с таким номером не найдена.")
@@ -44,16 +45,24 @@ def main():
         if command == 'add':
             task = input("Введите задачу: ")
             add_task(task)
+
         elif command == 'show':
             show_task()
+
         elif command == 'complete':
-            task_number = int(input("Введите номер задачи: "))
-            complete_task(task_number)
+            try:
+                task_number = int(input("Введите номер задачи: "))
+                complete_task(task_number)
+            except ValueError:
+                print("Введите название в числовом формате.")
+
         elif command == 'delete':
             pass  # Удалить задачу
+
         elif command == 'exit':
             print("Выход...")
             break
+
         else:
             print("Неизвестная команда. Попробуйте ещё раз.")
 
